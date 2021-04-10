@@ -28,14 +28,6 @@ class  Welcome extends React.Component{
         return rvalue;
     }
 
-  async addUser(name, location, email, phone){
-        await  this.state.contract
-        .methods
-        .addUser(name, location, email, phone)
-        .send({from :  this.state.currentAccount});
-
-}
-
 
   async loadWeb3(){
       if (window.ethereum) {
@@ -62,7 +54,6 @@ class  Welcome extends React.Component{
     const web3 = await new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     this.setState({currentAccount:accounts[0]});
-    console.log(accounts[0]);
     console.log( this.state.currentAccount);
     const networkId = await web3.eth.net.getId();
     const networkData = ModelABI.networks[networkId];
@@ -70,12 +61,10 @@ class  Welcome extends React.Component{
       const Model = await new web3.eth.Contract(ModelABI.abi,networkData.address);
       this.setState({contract :Model});
       const x = await Model.methods.getAllUsers().call();
-      console.log(this.state.contract);
+      const y = await Model.methods.getAllServiceProviders().call();
       console.log(x);
-      let z = await Model.methods.Users(x[0]).call();
-      console.log(z);
+      //let z = await Model.methods.Users().call();
       let iop = await this.getUserState(this.state.contract);
-      this.setState({existingUser : iop});
     }
     else{
       window.alert("Please switch to Ganache Network!!")
