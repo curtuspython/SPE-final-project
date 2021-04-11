@@ -54,7 +54,7 @@ class RegisterUser extends Component{
             <form onSubmit={this.onsubmit}>
                 <h1>Sign Up for User</h1>
                     <p>Please fill in this form to create an account</p>
-                <input type ="text"  name = "userAddress" value={this.state.userAccount} />
+                <input type ="text"  name = "userAddress" readOnly={true} value={this.state.userAccount = this.props.Account} disabled={true}/>
                 <input type="text" placeholder="Enter full name" name="full_name"   required/>
                 <input type="text" placeholder="Enter Home adddress" name="home"   required/>
                 <input type="text" placeholder="Enter City" name="location" required/>

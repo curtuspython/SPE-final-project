@@ -4,6 +4,7 @@ import './App.css'
 import Web3 from 'web3'
 import ModelABI from './contracts/Model.json';
 import RegisterScreen from "./components/RegisterScreen";
+import DisplayServiceProviders from "./components/DisplayServiceProviders";
 
 
 class  Welcome extends React.Component{
@@ -14,7 +15,12 @@ class  Welcome extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state={currentAccount: 0x0, contract: null, existingUser :null};
+        this.state={currentAccount: 0x0,
+            contract: null,
+            existingUser :null,
+            existingServiceProvider:null,
+            serviceProvidersList :null
+        };
     }
 
     async getUserState (contract){
@@ -24,8 +30,15 @@ class  Welcome extends React.Component{
               rvalue = result;
           });
         this.setState({existingUser:rvalue});
+
+        rvalue = false
+        await  this.state.contract.methods.serviceProviderExist( this.state.currentAccount).call()
+            .then(function (result){
+                rvalue = result;
+            });
+        this.setState({existingServiceProvider:rvalue});
+
         console.log(rvalue);
-        return rvalue;
     }
 
 
@@ -63,7 +76,8 @@ class  Welcome extends React.Component{
       const x = await Model.methods.getAllUsers().call();
       const y = await Model.methods.getAllServiceProviders().call();
       console.log(x);
-      //let z = await Model.methods.Users().call();
+      console.log(y);
+      console.log(await Model.methods.ServiceProviders(y[4]).call());
       let iop = await this.getUserState(this.state.contract);
     }
     else{
@@ -71,10 +85,13 @@ class  Welcome extends React.Component{
     }
   }
 
-  RegisterScreenLoader(x){
+  RegisterScreenLoader(x, y){
 
-    if( x === true)
-        return <h1>hello</h1>
+    if( x === true || y === true)
+        if(x === true)
+            return  <DisplayServiceProviders Account = {this.state.currentAccount} Contract = {this.state.contract}/>
+        else
+            return <h1>Hello service provider</h1>
     else
         return <RegisterScreen Account ={ this.state.currentAccount}  Contract = { this.state.contract} />
 
@@ -87,7 +104,7 @@ class  Welcome extends React.Component{
 
               {
 
-                  this.RegisterScreenLoader(this.state.existingUser)
+                  this.RegisterScreenLoader(this.state.existingUser,this.state.existingServiceProvider)
               }
 
           </div>);

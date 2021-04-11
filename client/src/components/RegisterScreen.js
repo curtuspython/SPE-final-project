@@ -36,7 +36,7 @@ const RegisterScreen = ({Account, Contract}) => {
                             <RegisterUser Account={Account} contract ={Contract}/>
                         </Route>
                         <Route path = "/registersp">
-                            <RegisterServiceProvider/>
+                            <RegisterServiceProvider Account={Account} contract ={Contract}/>
                         </Route>
                     </Switch>
                 </div>

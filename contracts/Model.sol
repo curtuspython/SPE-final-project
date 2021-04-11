@@ -124,6 +124,15 @@ contract Model {
             return false;
     }
 
+    // Function to check if service provider already exist.
+
+    function serviceProviderExist(address payable Address) public view returns (bool){
+        if (ServiceProviders[Address].id > 0) {
+            return true;
+        }
+        else
+            return false;
+    }
 
 
     // Function to add service providers
