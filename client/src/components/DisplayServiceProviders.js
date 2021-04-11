@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import 'react-bootstrap';
 import {useState} from 'react';
-
+import DisplayComponent from "./DisplayComoponent";
 
 
 class DisplayServiceProviders extends React.Component{
@@ -11,7 +11,7 @@ class DisplayServiceProviders extends React.Component{
         this.state ={service_providers:null,
         type_of_sp:1,
         isSubmitted:false,
-        list_of_selected_sp: null};
+        list_of_selected_sp: []};
 
     }
 
@@ -28,12 +28,13 @@ class DisplayServiceProviders extends React.Component{
         e.preventDefault()
         let i =0;
         let x = null;
-        let z = [0];
+        let z = [];
         for(;i<this.state.service_providers.length; ++i){
             let x = await this.props.Contract.methods.ServiceProviders(this.state.service_providers[i]).call()
             if(x.service_type === this.state.type_of_sp)
                 z.push(x)
         }
+        this.setState({list_of_selected_sp:z })
         console.log(z);
 
     }
@@ -50,8 +51,17 @@ render() {
              <option value={3}>Painting</option>
              <option value ={4}>Electrical</option>
          </select>
-                 <button>Submit Request{this.state.type_of_sp}</button>
+                 <button>Find</button>
              </form>
+              <div className="users">
+                 {this.state.list_of_selected_sp.map((user, index) => (<div className='item-container' key={index}>
+
+                         <div className='users'>
+                                <DisplayComponent user ={user} contract ={this.props.contract} account = {this.props.Account}/>
+                         </div>
+                     </div>
+                 ))}
+         </div>
          </div>
         )}
 
