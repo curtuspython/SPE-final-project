@@ -42,7 +42,7 @@ render() {
 
 
     return(
-         <div>
+         <div class = "hero">
              <form onSubmit={this.onSubmit}>
                  <label id={"service_type"}>Choose the service category :</label>
              <select id="service_type" style={ {width: 400, height: 30,background : "yellow",

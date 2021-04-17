@@ -2,6 +2,7 @@ import React from "react";
 import 'react-bootstrap';
 import Payment from "./Payment";
 import "../css/table.css"
+import '../css/RegisterScreen.css'
 const green = '#FFd177';
 const yellow = '#39D1B4';
 
@@ -31,11 +32,11 @@ class DisplayComponent extends React.Component{
     }
     render(){
         return(
-          <div class="custom-select">
+          <div class>
               <br></br>
               <br></br>
               <form onSubmit={this.onSubmit}>
-              <table style={{ 'borderColor':"black", 'borderStyle':'solid'}}>
+              <table>
                   <thead>
                   <tr>
                       <th>Charges :{this.props.sp.charges}</th>

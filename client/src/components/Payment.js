@@ -17,7 +17,12 @@ class  Payment extends React.Component{
     render(){
 
         return (
-            <div styles={{ backgroundImage:`url(${payment})` }}>
+            <div class = "hero">
+                <h2>CAUTION: Click only if the service is completed. </h2>
+               <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <button onClick={this.onClick} height= "100%"> click on this to pay to the service provider </button>
 
             </div>

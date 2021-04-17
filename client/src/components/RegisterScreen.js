@@ -48,13 +48,12 @@ const RegisterScreen = ({Account, Contract}) => {
                     <div className="bubbles">
                         <img src={bubbles}/>
                         <img src={bubbles}/>
-                        <img src={bubbles}/><img src={bubbles}/>
                         <img src={bubbles}/>
                         <img src={bubbles}/>
                         <img src={bubbles}/>
                         <img src={bubbles}/>
-
-
+                        <img src={bubbles}/>
+                        <img src={bubbles}/>
                     </div>
 
                     <Switch>

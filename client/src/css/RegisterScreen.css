@@ -102,3 +102,25 @@ a:hover
     text-decoration:none;
     cursor:pointer;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) {
+    background: #fff;
+}
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+}
+td, th {
+    padding: 6px;
+    border: 2px solid #ccc;
+    text-align: center;
+    border: 5px solid darkred;
+    width: 390px;
+    overflow: hidden;
+}
