@@ -1,13 +1,15 @@
-import React, {useEffect} from "react";
+import React from "react";
 import 'react-bootstrap';
-const green = '#39D1B4';
-const yellow = '#FFD712';
-import servicerequested from './servicerequested'
+import Payment from "./Payment";
+import "../css/table.css"
+const green = '#FFd177';
+const yellow = '#39D1B4';
+
 class DisplayComponent extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {submitted: false,color: green };
+        this.state = {submitted: false,color: green, contract: this.props.contract };
         this.changeColor = this.changeColor.bind(this);
 
     }
@@ -18,33 +20,37 @@ class DisplayComponent extends React.Component{
 
      onSubmit = async(e) => {
         e.preventDefault();
-        await this.props.contract.requestService(this.props.user.address)
-            .send({from: this.props.Account, value: this.props.sp.charges});
+        console.log(this.props.sp.Address);
+        console.log(this.props.account);
+        console.log(this.props.sp.charges);
+        await this.state.contract.methods.requestService(this.props.sp.Address)
+            .send({from: this.props.account, value: this.props.sp.charges});
         console.log("pressed");
         this.setState({submitted:true})
 
     }
     render(){
         return(
-          <div>
+          <div class="custom-select">
+              <br></br>
+              <br></br>
               <form onSubmit={this.onSubmit}>
-              <table style={{"borderWidth":"5px", 'borderColor':"black", 'borderStyle':'solid'}}>
+              <table style={{ 'borderColor':"black", 'borderStyle':'solid'}}>
                   <thead>
-                  <tr bgcolor={"yellow"}>
-                      <th>Charges :{this.props.user.charges}</th>
-                      <th colSpan="2">{this.props.user.name}<br></br> {this.props.user.city}</th>
+                  <tr>
+                      <th>Charges :{this.props.sp.charges}</th>
+                      <th colSpan="2">{this.props.sp.name}<br></br> {this.props.sp.city}</th>
                   </tr>
                   </thead>
+                  </table><table style={{'border' : "black" }}>
                   <tbody>
                   <tr>
-                      <td>{this.props.user.phone}</td>
-                      <td>{this.props.user.email    }</td>
-                      <td bgcolor={"red"}><button color={"yellow"} onClick={this.changeColor} hidden={this.state.submitted? "true":""}>Place Request for Service</button></td>
+                      <td>{this.props.sp.phone}</td>
+                      <td>{this.props.sp.email    }</td>
+                      <td bgcolor={"red"}><button onClick={this.changeColor} hidden={this.state.submitted? "true":""}>Place Request for Service</button></td>
                   </tr>
                   <tr>
-                      {this.state.submitted === true ?
-                          <servicerequested/>
-                          :<h2>hello</h2>}
+
                   </tr>
                   </tbody>
 

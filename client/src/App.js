@@ -5,6 +5,7 @@ import Web3 from 'web3'
 import ModelABI from './contracts/Model.json';
 import RegisterScreen from "./components/RegisterScreen";
 import DisplayServiceProviders from "./components/DisplayServiceProviders";
+import Payment from "./components/Payment";
 
 
 class  Welcome extends React.Component{
@@ -85,12 +86,29 @@ class  Welcome extends React.Component{
     }
   }
 
+    async user()
+    {
+        let v= false;
+
+        await this.state.contract.methods.Users(this.state.currentAccount).call()
+            .then(function(result){
+                v= result[8];
+
+
+
+            });
+        this.setState({sp :v});
+    }
+
   RegisterScreenLoader(x, y){
 
     if( x === true || y === true)
-        if(x === true)
-            return  <DisplayServiceProviders Account = {this.state.currentAccount} Contract = {this.state.contract}/>
-        else
+        if(x === true){
+            this.user();
+            if(this.state.sp=== true){
+                return <Payment contract= {this.state.contract} account ={this.state.currentAccount}/>}
+            else {
+                return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract}/>}}        else
             return <h1>Hello service provider</h1>
     else
         return <RegisterScreen Account ={ this.state.currentAccount}  Contract = { this.state.contract} />

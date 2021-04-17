@@ -57,20 +57,19 @@ const RegisterServiceProvider = ({Account, contract}) =>{
     return(
         <div className="container" color= "lightblue">
             <form onSubmit={onsubmit}>
-                <h1>Sign Up for Service Provider</h1>
-                <p>Please fill in this form to create an account</p>
-                <input type ="text"  name = "spAddress" readOnly={true}  disabled={true} value={Account}/>
-                <input type="text" placeholder="Enter full name" name="full_name"   required/>
-                <input type="text" placeholder="Enter Home adddress" name="home"   required/>
-                <input type="text" placeholder="Enter City" name="location" required/>
+                <h1>Sign Up for Service Provider</h1><br></br><br></br>
+                <input type ="text"  name = "spAddress" readOnly={true}  disabled={true} value={Account}/><br></br><br></br>
+                <input type="text" placeholder="Enter full name" name="full_name"   required/><br></br><br></br>
+                <input type="text" placeholder="Enter Home adddress" name="home"   required/><br></br><br></br>
+                <input type="text" placeholder="Enter City" name="location" required/><br></br><br></br>
                 <input type="text" name="email" placeholder="Enter Email"
-                       onChange={(e) => validateEmail(e)}/> <br/>
+                       onChange={(e) => validateEmail(e)}/> <br/><br></br><br></br>
                 <span style={{
                     fontWeight: 'bold',
                     color: 'red',
                 }}>{emailError}</span>
                 <input type="text" name="phone" placeholder="Enter Phone"
-                       onChange={(e) => validatePhoneNumber(e)}/> <br/>
+                       onChange={(e) => validatePhoneNumber(e)}/> <br/><br></br><br></br>
                 <span style={{
                     fontWeight: 'bold',
                     color: 'red',
@@ -85,7 +84,7 @@ const RegisterServiceProvider = ({Account, contract}) =>{
                 </select>
                <br></br><br></br>
                 <label id ="wei" >Enter Charges(in ETH):</label>
-                <input type="number" id ="wei" step="any" placeholder={"Enter the charges in ETH."} name="charges" />
+                <input type="number" id ="wei" step="any" placeholder={"Enter the charges in ETH."} name="charges" /><br></br><br></br>
                 <button className="btn btn-primary mt-2 btn-sm w-50">Sign Up</button>
             </form>
         </div>

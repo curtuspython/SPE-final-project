@@ -2,6 +2,7 @@ import React, {Component, useState} from "react";
 import '../css/RegisterScreen.css'
 import validator from 'validator'
 import {withRouter} from "react-router";
+import bubbles from "./images/bubble.png";
 
 class RegisterUser extends Component{
 
@@ -50,28 +51,38 @@ class RegisterUser extends Component{
     }
     render(){
     return(
-        <div className="container" color= "lightblue">
-            <form onSubmit={this.onsubmit}>
-                <h1>Sign Up for User</h1>
-                    <p>Please fill in this form to create an account</p>
-                <input type ="text"  name = "userAddress" readOnly={true} value={this.state.userAccount = this.props.Account} disabled={true}/>
-                <input type="text" placeholder="Enter full name" name="full_name"   required/>
-                <input type="text" placeholder="Enter Home adddress" name="home"   required/>
-                <input type="text" placeholder="Enter City" name="location" required/>
+        <div color= "lightblue">
+            <form onSubmit={this.onsubmit}><br></br>
+                <h1>Sign Up for User</h1><br></br>
+                <input type ="text"  name = "userAddress" readOnly={true} value={this.state.userAccount = this.props.Account} disabled={true}/><br></br><br></br>
+                <input type="text" placeholder="Enter full name" name="full_name"   required/><br></br><br></br>
+                <input type="text" placeholder="Enter Home adddress" name="home"   required/><br></br><br></br>
+                <input type="text" placeholder="Enter City" name="location" required/><br></br><br></br>
                 <input type="text" name="email" placeholder="Enter Email"
     onChange={(e) => this.validateEmail(e)}/> <br/>
                 <span style={{
                     fontWeight: 'bold',
                     color: 'red',
-                }}>{this.state.emailError}</span>
+                }}>{this.state.emailError}</span><br></br>
                 <input type="text" name="phone" placeholder="Enter Phone"
     onChange={(e) => this.validatePhoneNumber(e)}/> <br/>
                 <span style={{
                     fontWeight: 'bold',
                     color: 'red',
-                }}>{this.state.phoneError}</span>
+                }}>{this.state.phoneError}</span><br></br>
                 <button className="btn btn-primary mt-2 btn-sm w-50">Sign Up</button>
             </form>
+            <div className="bubbles">
+                <img src={bubbles}/>
+                <img src={bubbles}/>
+                <img src={bubbles}/><img src={bubbles}/>
+                <img src={bubbles}/>
+                <img src={bubbles}/>
+                <img src={bubbles}/>
+                <img src={bubbles}/>
+
+
+            </div>
         </div>
     )}
 }

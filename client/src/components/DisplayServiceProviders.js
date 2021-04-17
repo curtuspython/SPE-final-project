@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import 'react-bootstrap';
 import {useState} from 'react';
 import DisplayComponent from "./DisplayComoponent";
-
+import "../css/table.css"
 
 class DisplayServiceProviders extends React.Component{
 
@@ -44,24 +44,27 @@ render() {
     return(
          <div>
              <form onSubmit={this.onSubmit}>
-            <label id={"service_type"}>Choose the service category :</label>
-             <select id="service_type" className="form-control"  onChange={this.onChange} required>
-             <option value = {1}>Carpentry</option>
-             <option value = {2}>Plumbing</option>
-             <option value={3}>Painting</option>
-             <option value ={4}>Electrical</option>
+                 <label id={"service_type"}>Choose the service category :</label>
+             <select id="service_type" style={ {width: 400, height: 30,background : "yellow",
+                 margin: 30}} onChange={this.onChange} required>
+                 <option value={""} ></option>
+                 <option value = {1}>Carpentry</option>
+                 <option value = {2}>Plumbing</option>
+                 <option value={3}>Painting</option>
+                 <option value ={4}>Electrical</option>
          </select>
+
                  <button>Find</button>
              </form>
-              <div className="users">
-                 {this.state.list_of_selected_sp.map((user, index) => (<div className='item-container' key={index}>
+             <div>
+                 {this.state.list_of_selected_sp.map((sp, index) => (<div className='item-container' key={index}>
 
                          <div className='users'>
-                                <DisplayComponent user ={user} contract ={this.props.contract} account = {this.props.Account}/>
+                             <DisplayComponent sp ={sp} contract ={this.props.Contract} account = {this.props.Account}/>
                          </div>
                      </div>
                  ))}
-         </div>
+             </div>
          </div>
         )}
 
