@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import 'react-bootstrap';
 import {useState} from 'react';
 import DisplayComponent from "./DisplayComoponent";
-import "../css/table.css"
+import "../css/RegisterScreen.css"
 
 class DisplayServiceProviders extends React.Component{
 
@@ -21,6 +21,10 @@ class DisplayServiceProviders extends React.Component{
         x = await this.props.Contract.methods.getAllServiceProviders().call();
         this.setState({service_providers : x});
         console.log(this.state.service_providers);
+
+    }
+
+    check_service_Cancelled =  async() =>{
 
     }
 
@@ -57,7 +61,7 @@ render() {
                  <button>Find</button>
              </form>
              <div>
-                 {this.state.list_of_selected_sp.map((sp, index) => (<div className='item-container' key={index}>
+                 {this.state.list_of_selected_sp.map((sp, index) => (<div  key={index}>
 
                          <div className='users'>
                              <DisplayComponent sp ={sp} contract ={this.props.Contract} account = {this.props.Account}/>

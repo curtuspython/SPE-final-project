@@ -9,7 +9,6 @@ import {
 import RegisterUser from "./RegisterUser";
 import bubbles from "./images/bubble.png"
 import RegisterServiceProvider from "./RegisterServiceProvider";
-import {Navbar} from "react-bootstrap";
 
 const RegisterScreen = ({Account, Contract}) => {
 

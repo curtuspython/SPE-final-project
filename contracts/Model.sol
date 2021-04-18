@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: GPL-3.
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
 
@@ -61,6 +61,7 @@ contract Model {
 
 
     }
+// structure for Users
     // structure for Users
     struct User {
         uint id;
@@ -72,7 +73,7 @@ contract Model {
         string email;
         string phone;
         bool serv;
-        bool ongoing_service;
+        bool ongiong_service;
         bool messagealert;
 
     }
@@ -112,10 +113,10 @@ contract Model {
         address payable Address = payable(msg.sender);
         address payable sp = payable(0);
         bool serv=false;
-        bool ongoing_service=false;
+        bool ongiong_service=false;
         bool messagealert=false;
         user_Addresses.push(Address);
-        Users[Address] = User(usersId, Address, home_address, sp, name, city, email, phone,serv,ongoing_service,messagealert);
+        Users[Address] = User(usersId, Address, home_address, sp, name, city, email, phone,serv,ongiong_service,messagealert);
     }
 
     // Function to return the array of addresses of Users
@@ -219,13 +220,14 @@ contract Model {
             ServiceProviders[Users[user].sp].service_seeker[length - 1] = user;
             ServiceProviders[Users[user].sp].service_seeker.pop();
             Users[user].serv=false;
+            Users[user].ongiong_service=false;
 
         }
 
     }
     function service_choice(address payable user)public{
 
-        Users[user].ongoing_service=true;
+        Users[user].ongiong_service=true;
 
 
     }
@@ -243,7 +245,7 @@ contract Model {
             {
 
                 user=ServiceProviders[sp].service_seeker[i];
-                if(Users[user].ongoing_service==false)
+                if(Users[user].ongiong_service==false)
                 {   uint length=ServiceProviders[sp].service_seeker.length;
                     Users[user].serv=false;
                     Users[user].messagealert=true;
@@ -272,5 +274,8 @@ contract Model {
         return address(this).balance;
     }
 
+    function return_my_users(address payable sp) public view returns(address payable [] memory){
+        return ServiceProviders[sp].service_seeker;
+    }
 
 }
