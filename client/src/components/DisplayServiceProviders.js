@@ -3,6 +3,7 @@ import 'react-bootstrap';
 import {useState} from 'react';
 import DisplayComponent from "./DisplayComoponent";
 import "../css/RegisterScreen.css"
+import panda from "./images/panda.png";
 
 class DisplayServiceProviders extends React.Component{
 
@@ -35,7 +36,7 @@ class DisplayServiceProviders extends React.Component{
         let z = [];
         for(;i<this.state.service_providers.length; ++i){
             let x = await this.props.Contract.methods.ServiceProviders(this.state.service_providers[i]).call()
-            if(x.service_type === this.state.type_of_sp)
+            if(x.service_type === this.state.type_of_sp && x.status === true)
                 z.push(x)
         }
         this.setState({list_of_selected_sp:z })
@@ -43,9 +44,14 @@ class DisplayServiceProviders extends React.Component{
 
     }
 render() {
-    if (this.props.flag === false) {
+        document.title = "Select Provider";
+        if (this.props.flag === false) {
         return (
             <div class="hero">
+                <h2>
+                    <div className="panda"><img src={panda}></img><br></br> Your Helper</div>
+                    <br></br>
+                </h2>
                 <form onSubmit={this.onSubmit}>
                     <label id={"service_type"}>Choose the service category :</label>
                     <select id="service_type" style={{
@@ -61,8 +67,15 @@ render() {
 
                     <button>Find</button>
                 </form>
+
+                {this.state.list_of_selected_sp.length === 0 ?
+                    <h4>No service provider for selected category.</h4> : <h2></h2>
+                }
+
                 <div>
-                    {this.state.list_of_selected_sp.map((sp, index) => (<div key={index}>
+                    {
+
+                        this.state.list_of_selected_sp.map((sp, index) => (<div key={index}>
 
                             <div className='users'>
                                 <DisplayComponent sp={sp} contract={this.props.Contract} account={this.props.Account}/>

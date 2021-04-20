@@ -2,13 +2,16 @@ import React from "react";
 import 'react-bootstrap';
 import {useState} from 'react';
 import validator from "validator";
+import {BrowserRouter} from "react-router-dom";
+import {withRouter, Redirect} from 'react-router-dom'
 
 
 const RegisterServiceProvider = ({Account, contract}) =>{
     let [typeservice,setType] = useState(0x0);
     let [emailError,setEmailError] = useState('');
     let [phoneError,setPhoneError] = useState('');
-
+    let [navigate,setNavigate] = useState(false);
+    document.title = "Service Provider Registration";
     const onChange = (e) => {
         if(e.target.value == "default"){
             setType(Number(0));}
@@ -38,6 +41,11 @@ const RegisterServiceProvider = ({Account, contract}) =>{
         }
     }
 
+    const nextPage = () =>{
+        if(navigate === true)
+            return <Redirect to="/" push={true} />
+    }
+
     const onsubmit = async(e)=>{
         e.preventDefault();
         const name = e.target.elements.full_name.value;
@@ -47,9 +55,13 @@ const RegisterServiceProvider = ({Account, contract}) =>{
         const address= e.target.elements.spAddress.value;
         const sp_type = typeservice;
         const charges=e.target.elements.charges.value * Math.pow(10,18);
-        await contract.methods.addServiceProvider(name,location, email,phone, charges, sp_type).send({from : address}).then(function(result){
+       await contract.methods.addServiceProvider(name,location, email,phone, charges, sp_type).send({from : address}).then(function(result){
             console.log("The funciton was succesfully terminated");
         });
+        window.location.reload(false);
+
+
+
         //console.log(name+ location+ email+ phone+ address+ sp_type+ charges);
 
     }
@@ -82,13 +94,15 @@ const RegisterServiceProvider = ({Account, contract}) =>{
                     <option value={3}>Painting</option>
                     <option value ={4}>Electrical</option>
                 </select>
-               <br></br><br></br>
+                <br></br><br></br>
                 <label id ="wei" >Enter Charges(in ETH):</label>
                 <input type="number" id ="wei" step="any" placeholder={"Enter the charges in ETH."} name="charges" /><br></br><br></br>
                 <button className="btn btn-primary mt-2 btn-sm w-50">Sign Up</button>
             </form>
+
+
         </div>
     )
 }
 
-export default RegisterServiceProvider;
+export default withRouter(RegisterServiceProvider);

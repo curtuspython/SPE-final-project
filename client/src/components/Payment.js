@@ -1,5 +1,7 @@
+
 import React from 'react'
 import payment from './images/payment.png';
+import panda from "./images/panda.png";
 class  Payment extends React.Component{
 
     constructor(props){
@@ -11,6 +13,7 @@ class  Payment extends React.Component{
         e.preventDefault();
         await this.state.contract.methods.servicecompleted().send({from:this.state.account});
         alert('paid');
+        window.location.reload(false);
 
 
     }
@@ -18,8 +21,12 @@ class  Payment extends React.Component{
 
         return (
             <div class = "hero">
+                <h2>
+                    <div className="panda">Welcome to<br></br><img src={panda}></img><br></br> Your Helper</div>
+                    <br></br>
+                </h2>
                 <h2>CAUTION: Click only if the service is completed. </h2>
-               <br></br>
+                <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -29,4 +36,4 @@ class  Payment extends React.Component{
         )}
 }
 
-export default Payment;
+export default Payment

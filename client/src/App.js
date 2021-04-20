@@ -7,6 +7,7 @@ import RegisterScreen from "./components/RegisterScreen";
 import DisplayServiceProviders from "./components/DisplayServiceProviders";
 import Payment from "./components/Payment";
 import Servp from "./components/providerscreen";
+import Wait from "./components/wait"
 
 class  Welcome extends React.Component{
     componentWillMount() {
@@ -22,7 +23,8 @@ class  Welcome extends React.Component{
             existingUser :null,
             existingServiceProvider:null,
             serviceProvidersList :null,
-            msg : false
+            msg : false,
+            ong :false
 
         };
     }
@@ -93,16 +95,18 @@ class  Welcome extends React.Component{
     {
         let v= false;
         let alert = false;
-
+        let s=false;
         await this.state.contract.methods.Users(this.state.currentAccount).call()
             .then(function(result){
                 v= result.serv;
                 alert = result.messagealert;
                 console.log(alert);
+                s=result.ongiong_service;
 
             });
         this.setState({sp :v});
         this.setState({msg:alert});
+        this.setState({ong:s})
     }
 
   RegisterScreenLoader(x, y){
@@ -113,13 +117,18 @@ class  Welcome extends React.Component{
                 if(this.state.msg === true){
                     return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract} flag = {this.state.msg}/>
                 }
-                 else return <Payment contract= {this.state.contract} account ={this.state.currentAccount}/>}
+                else {
+                    if(this.state.ong==true)
+                        return <Payment contract= {this.state.contract} account ={this.state.currentAccount}/>
+                    else
+                        return <Wait/>
+                }
+            }
             else {
                 return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract} flag = {this.state.msg}/>} }
         else return <Servp Account={this.state.currentAccount}  Contract={this.state.contract}/>
     else
         return <RegisterScreen Account ={ this.state.currentAccount}  Contract = { this.state.contract} />
-
   }
 
   render() {

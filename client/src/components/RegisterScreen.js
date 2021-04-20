@@ -8,42 +8,46 @@ import {
 } from "react-router-dom";
 import RegisterUser from "./RegisterUser";
 import bubbles from "./images/bubble.png"
+import panda from "./images/panda.png"
 import RegisterServiceProvider from "./RegisterServiceProvider";
+import {withRouter} from "react-router";
 
 const RegisterScreen = ({Account, Contract}) => {
 
 
-        return(
-            <div class = "hero">
-                <nav className="navbar navbar-light bg-light" style={{background: "yellow"}}>
-                    <div className="container-fluid">
-                        <a className="navbar-brand" href="/">Home</a>
-                    </div>
-                </nav>
+    return(
+        <div class = "hero">
+            <nav className="navbar navbar-light bg-light" style={{background: "orange", height : "30px", fontSize : "20px"}}>
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="/" >Home</a>
+                </div>
+            </nav>
             <Router>
 
                 <div class = "hero">
-                    <br></br><br></br><br></br><br></br><br></br>
-
-                        <ul>
-                            <div>
+                    <h2>
+                    <div class = "panda">Welcome to<br></br><img src={panda}></img><br></br> Your Helper</div>
+                    <br></br>
+                    </h2>
+                    <ul>
+                        <div style={{background: "red", padding: "10px"}}>
                             <li>
-                                Please click on the links below to choose your category:<br></br><br></br>
+                                Please click below to choose your category:<br></br><br></br>
                             </li>
-                            </div>
+                        </div>
+                        <br></br>
+                        <li ><Link to="/registeruser" activeStyle = {{color : "red"}}><button class ="button" >User</button></Link>
+                            <br></br>
+                            <br></br>
+                        </li>
 
-                            <li ><Link to="/registeruser"><button class ="button" >User</button></Link>
-                                <br></br>
-                                <br></br>
-                            </li>
 
+                        <li class = "button"><Link to = "/registersp">
+                            <button className="button">Service Provider</button></Link>
 
-                            <li class = "button"><Link to = "/registersp">
-                                <button className="button">Service Provider</button></Link>
+                        </li>
 
-                            </li>
-
-                        </ul>
+                    </ul>
                     <div className="bubbles">
                         <img src={bubbles}/>
                         <img src={bubbles}/>
@@ -67,8 +71,8 @@ const RegisterScreen = ({Account, Contract}) => {
             </Router>
 
 
-            </div>
-  )
+        </div>
+    )
 }
 
-export default RegisterScreen;
+export default withRouter(RegisterScreen);

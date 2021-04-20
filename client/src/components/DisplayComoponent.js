@@ -19,7 +19,7 @@ class DisplayComponent extends React.Component{
         this.setState({ color: newColor })
     }
 
-     onSubmit = async(e) => {
+    onSubmit = async(e) => {
         e.preventDefault();
         console.log(this.props.sp.Address);
         console.log(this.props.account);
@@ -28,37 +28,39 @@ class DisplayComponent extends React.Component{
             .send({from: this.props.account, value: this.props.sp.charges});
         console.log("pressed");
         this.setState({submitted:true})
+        window.location.reload(false);
 
     }
     render(){
+        document.title = "Select Service Provider";
         return(
-          <div class>
-              <br></br>
-              <br></br>
-              <form onSubmit={this.onSubmit}>
-              <table>
-                  <thead>
-                  <tr>
-                      <th>Charges :{this.props.sp.charges}</th>
-                      <th colSpan="2">{this.props.sp.name}<br></br> {this.props.sp.city}</th>
-                  </tr>
-                  </thead>
-                  </table><table style={{'border' : "black" }}>
-                  <tbody>
-                  <tr>
-                      <td>{this.props.sp.phone}</td>
-                      <td>{this.props.sp.email    }</td>
-                      <td bgcolor={"red"}><button onClick={this.changeColor} hidden={this.state.submitted? "true":""}>Place Request for Service</button></td>
-                  </tr>
-                  <tr>
+            <div class>
+                <br></br>
+                <br></br>
+                <form onSubmit={this.onSubmit}>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Charges :{this.props.sp.charges}</th>
+                            <th colSpan="2">{this.props.sp.name}<br></br> {this.props.sp.city}</th>
+                        </tr>
+                        </thead>
+                    </table><table style={{'border' : "black" }}>
+                    <tbody>
+                    <tr>
+                        <td>{this.props.sp.phone}</td>
+                        <td>{this.props.sp.email    }</td>
+                        <td bgcolor={"red"}><button onClick={this.changeColor} hidden={this.state.submitted? "true":""}>Place Request for Service</button></td>
+                    </tr>
+                    <tr>
 
-                  </tr>
-                  </tbody>
+                    </tr>
+                    </tbody>
 
-              </table>
-              </form>
+                </table>
+                </form>
 
-          </div>
+            </div>
 
         ) }
 }

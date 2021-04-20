@@ -47,9 +47,11 @@ class RegisterUser extends Component{
         await this.props.contract.methods.addUser(name,home,location, email,phone).send({from : address}).then(function(result){
             console.log("The funciton was succesfully terminated");
         });
+        window.location.reload(false);
 
     }
     render(){
+        document.title = "User Registration";
     return(
         <div color= "lightblue">
             <form onSubmit={this.onsubmit}><br></br>

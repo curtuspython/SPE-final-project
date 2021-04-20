@@ -1,4 +1,3 @@
-
 import React from "react";
 import '../css/RegisterScreen.css'
 import {
@@ -7,39 +6,23 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import status from "./status";
+import Status from "./status";
 import Provider from "./Providerchoices";
 import * as PropTypes from "prop-types";
+import panda from "./images/panda.png";
 
-class Status extends React.Component {
-    constructor(props){
-        super(props);
-        this.state ={account:this.props.account, contract : this.props.contract};
-        console.log("hey i am called")
-    }
-    shoot=async(e)=> {
-        e.preventDefault();
-        await this.state.contract.methods.service_off().send({from:this.state.account});
-        alert('submitted');
-
-
-    }
-    render(){
-        return (
-            <div>
-
-                    <button onClick={this.shoot} height= "100%"> click on this to change the status </button>
-
-            </div>
-        )}
-}
 
 Status.propTypes = {};
 const providerscreen = ({Account, Contract}) => {
-
+    document.title = "Service Provider Screen";
     return(
+
         <Router>
             <div class={"hero"}>
+                <h2>
+                    <div className="panda">Welcome to<br></br><img src={panda}></img><br></br> Your Helper</div>
+                    <br></br>
+                </h2>
                 <ul><br></br>
                     <li>
                         <br></br><br></br>

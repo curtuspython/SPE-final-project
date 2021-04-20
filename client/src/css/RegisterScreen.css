@@ -36,8 +36,20 @@ input[type=text] {
     height: 30px;
     padding: 10px;
 }
-.bubbles img{
+
+.panda img{
     width:50px;
+    animation: panda 7s linear infinite;
+}
+.panda {
+    font-size: medium;
+    color: darkred;
+    font-style: italic;
+    padding-left: 0px;
+}
+
+.bubbles img{
+    width:100px;
     animation: bubble 7s linear infinite;
 }
 .bubbles{
