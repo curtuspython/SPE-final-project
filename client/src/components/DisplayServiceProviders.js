@@ -43,34 +43,66 @@ class DisplayServiceProviders extends React.Component{
 
     }
 render() {
+    if (this.props.flag === false) {
+        return (
+            <div class="hero">
+                <form onSubmit={this.onSubmit}>
+                    <label id={"service_type"}>Choose the service category :</label>
+                    <select id="service_type" style={{
+                        width: 400, height: 30, background: "yellow",
+                        margin: 30
+                    }} onChange={this.onChange} required>
+                        <option value={""}></option>
+                        <option value={1}>Carpentry</option>
+                        <option value={2}>Plumbing</option>
+                        <option value={3}>Painting</option>
+                        <option value={4}>Electrical</option>
+                    </select>
 
+                    <button>Find</button>
+                </form>
+                <div>
+                    {this.state.list_of_selected_sp.map((sp, index) => (<div key={index}>
 
-    return(
-         <div class = "hero">
-             <form onSubmit={this.onSubmit}>
-                 <label id={"service_type"}>Choose the service category :</label>
-             <select id="service_type" style={ {width: 400, height: 30,background : "yellow",
-                 margin: 30}} onChange={this.onChange} required>
-                 <option value={""} ></option>
-                 <option value = {1}>Carpentry</option>
-                 <option value = {2}>Plumbing</option>
-                 <option value={3}>Painting</option>
-                 <option value ={4}>Electrical</option>
-         </select>
+                            <div className='users'>
+                                <DisplayComponent sp={sp} contract={this.props.Contract} account={this.props.Account}/>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div class="hero">
+                <h1>service provider denied your request</h1>
+                <form onSubmit={this.onSubmit}>
+                    <label id={"service_type"}>Choose the service category :</label>
+                    <select id="service_type" style={{
+                        width: 400, height: 30, background: "yellow",
+                        margin: 30
+                    }} onChange={this.onChange} required>
+                        <option value={""}></option>
+                        <option value={1}>Carpentry</option>
+                        <option value={2}>Plumbing</option>
+                        <option value={3}>Painting</option>
+                        <option value={4}>Electrical</option>
+                    </select>
 
-                 <button>Find</button>
-             </form>
-             <div>
-                 {this.state.list_of_selected_sp.map((sp, index) => (<div  key={index}>
+                    <button>Find</button>
+                </form>
+                <div>
+                    {this.state.list_of_selected_sp.map((sp, index) => (<div key={index}>
 
-                         <div className='users'>
-                             <DisplayComponent sp ={sp} contract ={this.props.Contract} account = {this.props.Account}/>
-                         </div>
-                     </div>
-                 ))}
-             </div>
-         </div>
-        )}
+                            <div className='users'>
+                                <DisplayComponent sp={sp} contract={this.props.Contract} account={this.props.Account}/>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>)
+    }
+}
 
 }
 

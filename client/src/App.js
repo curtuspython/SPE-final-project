@@ -11,7 +11,7 @@ import Servp from "./components/providerscreen";
 class  Welcome extends React.Component{
     componentWillMount() {
         this.loadWeb3().then(r => {console.log("Connected to metamask")});
-        this.connectBlockChainData().then(r =>{this.user()});
+        this.connectBlockChainData().then(r =>{this.user();});
 
     }
 
@@ -98,7 +98,7 @@ class  Welcome extends React.Component{
             .then(function(result){
                 v= result.serv;
                 alert = result.messagealert;
-                console.log(v);
+                console.log(alert);
 
             });
         this.setState({sp :v});
@@ -111,13 +111,11 @@ class  Welcome extends React.Component{
         if(x === true){
             if(this.state.sp=== true){
                 if(this.state.msg === true){
-                    <h1> your requect was dinied</h1>
-                    window.alert("Service Provider Denied to service");
-                    return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract}/>
+                    return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract} flag = {this.state.msg}/>
                 }
                  else return <Payment contract= {this.state.contract} account ={this.state.currentAccount}/>}
             else {
-                return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract}/>}}
+                return <DisplayServiceProviders Account = {this.state.currentAccount}  Contract={this.state.contract} flag = {this.state.msg}/>} }
         else return <Servp Account={this.state.currentAccount}  Contract={this.state.contract}/>
     else
         return <RegisterScreen Account ={ this.state.currentAccount}  Contract = { this.state.contract} />
@@ -136,6 +134,7 @@ class  Welcome extends React.Component{
 
           </div>);
   }
+
 }
 
 export default Welcome;

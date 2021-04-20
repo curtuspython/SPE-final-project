@@ -5,6 +5,11 @@ pragma solidity >=0.7.0 <0.9.0;
 contract Model {
 
     address payable public admin;
+    function deposit(uint256 amount) payable public {
+        require(msg.value == amount);
+        // nothing else to do!
+    }
+
     constructor(){
         usersCount =0;
         admin = payable(msg.sender);
@@ -54,7 +59,7 @@ contract Model {
 
 
         serviceProviderCount++;
-        x = payable(0xd39cD70F514a0814c2Fc59350e11AA0EbA2b8CE8);
+            x = payable(0xd39cD70F514a0814c2Fc59350e11AA0EbA2b8CE8);
         sp_Addresses.push(x);
         ServiceProviders[x] = Service_Provider(serviceProviderCount,x,"Dada Dungeon","Bangalore",sp2, 'emaiol','obofddsfa',1200000000, 2,true);
 
@@ -191,6 +196,7 @@ contract Model {
             Users[user].sp = sp;
             ServiceProviders[sp].service_seeker.push(user);
             Users[user].serv=true;
+            Users[user].messagealert = false;
 
 
         }
@@ -276,6 +282,10 @@ contract Model {
 
     function return_my_users(address payable sp) public view returns(address payable [] memory){
         return ServiceProviders[sp].service_seeker;
+    }
+
+    function userRequestedFor(address payable user) public view returns(address payable){
+        return Users[user].sp;
     }
 
 }
