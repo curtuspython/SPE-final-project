@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
-
 contract Model {
 
     address payable public admin;
@@ -180,8 +179,6 @@ contract Model {
     function getAllServiceProviders() public view returns (address payable [] memory){
         return sp_Addresses;
     }
-
-    //require(msg.value == 2 ether)
     // function for checking ether value and registeration of user to particular service Providers
     function requestService(address payable sp) public payable {
         address payable user;
@@ -276,10 +273,6 @@ contract Model {
     function getBalance(address payable user,address payable sp) public payable{
         user.transfer(address(this).balance-(address(this).balance-ServiceProviders[sp].charges));
     }
-    function eth() public  view returns (uint){
-        return address(this).balance;
-    }
-
     function return_my_users(address payable sp) public view returns(address payable [] memory){
         return ServiceProviders[sp].service_seeker;
     }
