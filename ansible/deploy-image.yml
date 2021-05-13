@@ -1,10 +1,10 @@
 
 
 ---
-- name: Pull docker image of Scientific Calculator
+- name: Pull docker image of Your-Helper Project
   hosts: all
   tasks:
-    - name: Pull Calculator image
+    - name: Pull Your-Helper image
       docker_image:
         name: demonwolf1998/your-helper
         source: pull
