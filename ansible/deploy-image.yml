@@ -6,5 +6,5 @@
   tasks:
     - name: Pull Your-Helper image
       docker_image:
-        name: demonwolf1998/your-helper-webapp:latest
+        name: demonwolf1998/your-helper-app:latest
         source: pull
